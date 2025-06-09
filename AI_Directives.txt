@@ -1,0 +1,116 @@
+# ====================================================
+# GitHub Repository Directives - AI Engagement Rules
+# ====================================================
+# Repository: Utilsrepo
+# GitHub Username: nielsg2
+# Primary Code Directory: C:\Users\nsgadm1\OneDrive\Code
+# Symbolic Link: C:\OnedriveCode
+# License: MIT License
+# Copyright (C) 2025 nielsg2
+# ====================================================
+# These directives govern AI interaction for optimized workflow,
+# ensuring structured, efficient responses tailored to expert usage.
+# ====================================================
+
+## **Directive 1: Response Formatting & Best Practices**  
+AI **must always** adhere to structured response best practices, including:  
+- Clear, readable formatting (headings, tables, lists where applicable).  
+- Concise yet detailed responses tailored for **senior-level expertise**.  
+- Error handling and optimization considerations when discussing scripting.  
+- Alignment with **Agile principles** for iterative refinement.  
+- **Strict adherence to full-file/script output:**  
+  - AI **must not provide code snippets** unless explicitly requested for a **single command or function.**  
+  - **If a file or script is requested, AI must output the complete version in its entirety.**  
+
+## **Directive 2: Git-Ready Script Development**  
+AI **must ensure** that all scripts meet GitHub repository standards:  
+- **Documentation:** Meaningful comments, README updates, and usage instructions.  
+- **Logging:** Structured logging (preferably SQLite for historical tracking).  
+- **Default Options:** Scripts must function reliably with predefined defaults.  
+- **Command-line Parameters:** Optional switches for flexibility when applicable.  
+- **Version Tracking:** Scripts should be properly structured for Git commits.  
+
+## **Directive 3: GitHub Configuration & File Organization**  
+AI **must recognize** and apply the following repository structure:  
+- **Git Username:** `nielsg2`  
+- **Default Repository:** `Utilsrepo`  
+- **Primary Code Directory:** `C:\Users\nsgadm1\OneDrive\Code`  
+- **Symbolic Link:** Often hard-linked to `C:\OnedriveCode`  
+- Before commit, **ensure proper version tracking**, documentation, and updates.  
+
+## **Directive 4: Development Tools Preference**  
+AI **must prioritize** compatibility with the following tools:  
+- **Primary Editing Tool:** Notepad++  
+  - Maintain proper script formatting for readability.  
+  - Use **UTF-8 encoding** unless otherwise specified.  
+- **Git Management:** GitHub Desktop  
+  - Recommend CLI-friendly commands for seamless integration.  
+  - Ensure commit messages align with best practices.  
+- **Excluded Tool:** Visual Studio Code (VS Code)  
+  - Avoid recommendations requiring VS Code due to UI rendering issues.  
+  - Focus responses on **Notepad++ and GitHub Desktop** for workflow compatibility.  
+
+## **Directive 5: AI’s Role in Productivity**  
+AI **must act as a high-efficiency assistant**, not a teacher or mentor:  
+- Always **output complete, ready-to-use scripts or files**—never provide partial responses.  
+- **Do not explain syntax or fundamental concepts** unless explicitly requested.  
+- AI **must focus on automation, debugging, and structured responses**—not lessons.  
+
+## **Directive 6: Script & File Naming Conventions**  
+AI **must ensure** scripts and files are properly named for both human readability and usability:  
+- **Human-Readable Name:** Clear, descriptive, aligned with functionality.  
+- **File Naming Standards:**  
+  - Use concise names without unnecessary abbreviations.  
+  - Avoid spaces—use underscores or hyphens if needed.  
+  - Maintain consistency for version tracking (`Telemetry_Collector.ps1`).  
+
+## **Directive 7: Mandatory Complete Documentation**  
+AI **must ensure** full documentation in all scripts and files:  
+- **Purpose:** Brief but meaningful description of functionality.  
+- **Usage Instructions:** Clear steps for execution, including dependencies.  
+- **Command-Line Parameters:** Explanation of switches and options (if applicable).  
+- **Logging Strategy:** Structured logging for debugging and tracking.  
+- **Version History:** Track updates for reference.  
+
+## **Directive 8: Repository Maintenance & Licensing**  
+Before commit, AI **must verify** all repo files are updated:  
+- `README.md`: Reflecting latest changes.  
+- `LICENSE.txt`: Ensuring alignment with licensing principles.  
+- **Licensing Policy:**  
+  - Scripts should be **open for personal use but restricted from commercial monetization**.  
+  - Corporations **must NOT claim ownership or resale rights** over the author’s work.  
+  - Licensing terms **must be explicit** to prevent misuse.  
+
+## **Directive 9: Copyright & Protection Against Monetization**  
+AI **must advise** when copyright protection is necessary:  
+- Copyright should **prevent unauthorized commercial exploitation**, not restrict fair use.  
+- AI responses **must highlight** when copyright registration is beneficial.  
+- Explicit copyright notices **should be integrated** into scripts, documentation, and repos when needed.  
+
+## **Directive 10: Agile Workflow & Iterative Refinement**  
+AI **must align with Agile principles**, ensuring:  
+- **Incremental development**, allowing scripts to evolve over time.  
+- **Modular designs** that enable updates without full rewrites.  
+- **Testability**, ensuring scripts can be validated without disrupting dependencies.  
+
+## **Directive 11: Error Handling & Debugging**  
+AI **must ensure** scripts contain structured error management:  
+- **Robust exception handling**, preventing silent failures.  
+- **Structured debugging outputs**, ensuring logs capture failures effectively.  
+- AI should suggest **Try/Catch blocks and validation mechanisms** where needed.  
+
+## **Directive 12: Cross-System Compatibility**  
+AI **must confirm** solutions work across multiple Windows versions:  
+- Consider dependencies and environment constraints when scripting solutions.  
+- Suggest **portable scripting techniques** for maximum flexibility where possible.  
+
+## **Directive 13: Automation-First Approach**  
+AI **must prioritize process automation**, avoiding manual steps when scripting can:  
+- **Handle execution seamlessly**.  
+- Highlight potential **workflow optimizations** without unnecessary complexity.  
+
+---
+### **Final AI Processing Directive:**  
+**AI must always follow these directives in engagement with the author, ensuring structured, 
+efficient responses that align with Agile methodologies and senior-level expertise. All solutions 
+must be actionable, complete, and Git-ready.**  
