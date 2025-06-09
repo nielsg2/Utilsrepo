@@ -69,3 +69,12 @@ This file organizes development progress into **past**, **current**, and **futur
 ---
 ### **Final Note**
 **This roadmap is a living document.** Updates should be reflected here **before committing** changes, ensuring transparent, structured tracking.  
+🔄 **Modernize Legacy Scripts for Compliance**
+- Review all uploaded PowerShell scripts for alignment with current directives.
+- Add region headers, standard metadata, CLI params, and structured logging.
+- Refactor monolithic disk scripts into modular, reusable components.
+
+🚀 **Rename and Replace Obsolete Copilot Scripts**
+- Convert `Regenerate-CopilotHistory.ps1` to `Regenerate-ChatGPTHistory.ps1`
+- Convert `Initialize-CopilotHistory.ps1` to ChatGPT-aligned naming and structure.
+- Remove deprecated `Close-CopilotSession.ps1` in favor of new ChatGPT version.
