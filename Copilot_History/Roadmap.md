@@ -1,0 +1,71 @@
+# Utilsrepo Development Roadmap
+# Author: nielsg2
+# Repository: Utilsrepo
+# GitHub Username: nielsg2
+# License: MIT License
+# Copyright (C) 2025 nielsg2
+# ====================================================
+# Purpose:  
+# This roadmap outlines development tasks, enhancements, and historical decisions  
+# across all scripts in Utilsrepo. It serves as a **structured, human-readable archive**  
+# for tracking modifications and guiding future iterations.  
+# ====================================================
+
+## **Roadmap Structure**
+This file organizes development progress into **past**, **current**, and **future** stages:
+- **Completed Tasks:** Archive of implemented changes, including reasoning and impact.
+- **Ongoing Work:** Active modifications requiring iteration or testing.
+- **Planned Features:** Future enhancements and exploratory ideas.
+
+---
+
+## **Completed Tasks**
+✅ **PowerShell Profile Fixes** (`Microsoft.PowerShell_profile.ps1`)  
+- Resolved module locking errors for multiple shell instances.  
+- Ensured proper logging setup and execution without syntax failures.  
+
+✅ **AI Directives Strengthening** (`AI_Directives.txt`)  
+- Enforced **full-file/script output** requirements.  
+- Expanded Git, licensing, and automation directives for strict compliance.  
+
+✅ **Repository Organization Improvements**  
+- Verified that all primary scripts are structured within `Utilsrepo`.  
+- Identified that `SETUP.ps1` requires a complete initialization script.  
+
+---
+
+## **Ongoing Work**
+🔄 **Refine Roadmap Structure (`ROADMAP.md`)**  
+- Optimize formatting for clear readability.  
+- Establish guidelines for documenting feature iterations effectively.  
+
+🔄 **Ensure Git Commit Automation (`Git-QuickCommit`)**  
+- Validate that **Git commits include roadmap updates** when changes are recorded.  
+- Implement **automated commit triggers** where applicable.  
+
+🔄 **Enhance Logging Across Scripts** (`DiskPerfTelemetry.ps1`, `PersistentAdminShell.ps1`)  
+- Standardize structured logging outputs to ensure uniform debugging and tracking.  
+- Ensure **SQLite-based logging** integration where beneficial.  
+
+---
+
+## **Planned Features**
+🚀 **Finalize `SETUP.ps1` for Environment Initialization**  
+- Automate module installations and **PowerShell environment setup**.  
+- Configure default execution settings for streamlined usability.  
+
+🚀 **Improve Telemetry Data Collection (`DiskPerfTelemetry.ps1`)**  
+- Expand data capture beyond just **IOPS, latency, and throughput**.  
+- Integrate **dynamic counter selection** for more robust analysis.  
+
+🚀 **Optimize Disk Management Scripts (`ListVolumesAndSetDisksOffline.ps1`)**  
+- Enhance logic for **tiering automation** using telemetry results.  
+- Implement **automated evacuation of slow drives** based on performance data.  
+
+🚀 **Strengthen Git Workflow (`README.md`, `ROADMAP.md`)**  
+- Automate repository documentation updates when new development milestones are reached.  
+- Ensure **consistent commit metadata** to maintain historical clarity.  
+
+---
+### **Final Note**
+**This roadmap is a living document.** Updates should be reflected here **before committing** changes, ensuring transparent, structured tracking.  
