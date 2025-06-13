@@ -1,60 +1,80 @@
-# PowerShell Script: Disk Performance Telemetry
-# Author: nielsg2
-# Repository: Utilsrepo
-# Description: Gathers IOPS, latency, and throughput for each physical disk, logs results for historical tracking.
-# Version: 1.5
 
-# Ensure script runs as Administrator
-$adminCheck = [System.Security.Principal.WindowsPrincipal] [System.Security.Principal.WindowsIdentity]::GetCurrent()
-if (-not $adminCheck.IsInRole([System.Security.Principal.WindowsBuiltInRole] "Administrator")) {
-    Write-Host "Starting persistent Administrator PowerShell session..." -ForegroundColor Yellow
-    
-    Start-Process PowerShell -ArgumentList "-NoExit -NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs
-    
-    Exit
-}
+<#
+.SYNOPSIS
+    Collects disk performance telemetry (IOPS, latency, throughput).
+.DESCRIPTION
+    Queries disk performance counters and logs results in readable format.
+    Future versions may integrate SQLite logging for long-term tracking.
+.NOTES
+    Author: nielsg2
+    License: MIT
+    Repo: https://github.com/nielsg2/Utilsrepo
+#>
 
-# Define persistent logging folder
-$logFolder = "$env:USERPROFILE\Documents\DiskTelemetryLogs"
-$logFile = "$logFolder\Disk_Performance_$(Get-Date -Format yyyyMMdd_HHmmss).csv"
+[CmdletBinding()]
+param (
+    [string]$OutFile = "$PSScriptRoot\Logs\DiskPerfMetrics.csv",
+    [switch]$VerboseOutput
+)
 
-# Create log folder if it doesn’t exist
-if (-not (Test-Path $logFolder)) {
-    New-Item -Path $logFolder -ItemType Directory
-    Write-Host "Created log folder: $logFolder" -ForegroundColor Green
-}
+# region CONFIGURATION
+$LogPath = Split-Path -Path $OutFile
+$PerfCounters = @(
+    "\PhysicalDisk(*)\Disk Reads/sec",
+    "\PhysicalDisk(*)\Disk Writes/sec",
+    "\PhysicalDisk(*)\Avg. Disk sec/Read",
+    "\PhysicalDisk(*)\Avg. Disk sec/Write",
+    "\PhysicalDisk(*)\Disk Bytes/sec"
+)
+# endregion
 
-# Retrieve valid disk performance instances from WMI
-$disks = Get-PhysicalDisk | Select-Object DeviceID, MediaType, FriendlyName
-$diskInstances = Get-WmiObject -Query "SELECT Name FROM Win32_PerfFormattedData_PerfDisk_PhysicalDisk" | Select-Object Name
-
-$performanceData = foreach ($disk in $disks) {
-    $diskInstance = $diskInstances | Where-Object { $_.Name -match "^\d+" } | Where-Object { $_.Name -eq "$($disk.DeviceID)" }
-
-    if ($diskInstance -and $diskInstance.Name) {
-        try {
-            $perfData = Get-WmiObject -Query "SELECT DiskTransfersPerSec, AvgDiskSecPerTransfer, DiskBytesPerSec FROM Win32_PerfFormattedData_PerfDisk_PhysicalDisk WHERE Name='$($diskInstance.Name)'"
-
-            [PSCustomObject]@{
-                "Timestamp" = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-                "Disk ID" = $disk.DeviceID
-                "Media Type" = $disk.MediaType
-                "Disk Name" = $disk.FriendlyName
-                "IOPS" = "{0:N2}" -f $perfData.DiskTransfersPerSec
-                "Latency (ms)" = "{0:N2}" -f ($perfData.AvgDiskSecPerTransfer * 1000)
-                "Throughput (MB/s)" = "{0:N2}" -f ($perfData.DiskBytesPerSec / 1MB)
-            }
-        } catch {
-            Write-Warning "Failed to retrieve performance data for Disk ID $($disk.DeviceID)"
-        }
-    } else {
-        Write-Warning "No valid performance counters found for Disk ID $($disk.DeviceID)"
+# region FUNCTIONS
+function Ensure-LogDirectory {
+    if (-not (Test-Path $LogPath)) {
+        New-Item -Path $LogPath -ItemType Directory -Force | Out-Null
     }
 }
 
-# Save data to CSV for historical tracking
-$performanceData | Export-Csv -Path $logFile -NoTypeInformation
-Write-Host "Performance data saved to: $logFile" -ForegroundColor Cyan
+function Collect-Telemetry {
+    try {
+        Get-Counter -Counter $PerfCounters -ErrorAction Stop
+    } catch {
+        Write-Warning "⚠️ Failed to retrieve performance counters: $_"
+        return $null
+    }
+}
 
-# Display formatted table output
-$performanceData | Format-Table -AutoSize
+function Format-CounterResults {
+    param ([object]$CounterData)
+
+    return $CounterData.CounterSamples | ForEach-Object {
+        [PSCustomObject]@{
+            Timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+            Path      = $_.Path
+            Value     = [math]::Round($_.CookedValue, 2)
+        }
+    }
+}
+
+function Export-Telemetry {
+    param ([object]$FormattedData)
+    $FormattedData | Export-Csv -Path $OutFile -Append -NoTypeInformation -Encoding UTF8
+}
+# endregion
+
+# region EXECUTION
+Write-Host "`n📊 Starting Disk Performance Telemetry..." -ForegroundColor Cyan
+Ensure-LogDirectory
+$rawData = Collect-Telemetry
+
+if ($rawData) {
+    $formatted = Format-CounterResults -CounterData $rawData
+    if ($VerboseOutput) {
+        $formatted | Format-Table -AutoSize
+    }
+    Export-Telemetry -FormattedData $formatted
+    Write-Host "✅ Telemetry written to $OutFile"
+} else {
+    Write-Host "❌ Telemetry collection failed. No data written."
+}
+# endregion

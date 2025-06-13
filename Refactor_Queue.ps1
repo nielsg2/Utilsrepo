@@ -21,7 +21,7 @@ $RefactorQueue = @(
     @{ Script = "SetEmptyDrivesOffline.ps1";          Status = "Same as above" },
     @{ Script = "SetOfflineDisksOnline.ps1";          Status = "Wrap logic in function, add params" },
     @{ Script = "SimulateOutput.ps1";                 Status = "Add summary message and optional JSON log" },
-    @{ Script = "ListVolumesAndSetDisksOffline.ps1";  Status = "High priority: modularize and encapsulate logic" },
+    @{ Script = "ListVolumesAndSetDisksOffline.ps1";  Status = "✅ COMPLETE: Modular, logged, WhatIf-ready declutter tool" },
     @{ Script = "PersistentAdminShell.ps1";           Status = "Add headers, admin checks, CLI flow" },
     @{ Script = "Microsoft.ps1";                      Status = "Undocumented — clarify intent or remove" },
     @{ Script = "Microsoft.PowerShell_profile.ps1";   Status = "Optional cleanup, not part of repo release" },

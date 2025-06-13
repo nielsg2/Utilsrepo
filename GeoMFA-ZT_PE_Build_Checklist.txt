@@ -1,0 +1,44 @@
+GeoMFA-ZT - Custom WinPE ISO Build Checklist
+=============================================
+
+Goal:
+Create a bootable WinPE image for AMD X470 systems with RAIDExpert2 + drivers preloaded.
+
+Checklist:
+----------
+[ ] Download and install Windows ADK + WinPE Add-on from Microsoft:
+    - https://learn.microsoft.com/en-us/windows-hardware/get-started/adk-install
+
+[ ] Launch 'Deployment and Imaging Tools Environment' (as Administrator)
+
+[ ] Create WinPE working directory:
+    copype amd64 C:\WinPE_amd64
+
+[ ] Mount WinPE image:
+    Dism /Mount-Image /ImageFile:C:\WinPE_amd64\media\sources\boot.wim /index:1 /MountDir:C:\WinPE_amd64\mount
+
+[ ] Copy required tools into:
+    C:\WinPE_amd64\mount\Program Files\
+    - Explorer++ (portable)
+    - Notepad++
+    - RAIDXpert2 GUI (if extractable from motherboard support DVD)
+    - AMD RAID + Chipset drivers
+
+[ ] Add startup script to launch Explorer++ and command prompt
+
+[ ] Commit and unmount image:
+    Dism /Unmount-Image /MountDir:C:\WinPE_amd64\mount /Commit
+
+[ ] Create ISO:
+    MakeWinPEMedia /ISO C:\WinPE_amd64 C:\GeoMFA-PE.iso
+
+[ ] Test boot the ISO on target PC (enable UEFI boot)
+
+Optional:
+---------
+[ ] Add NVMe drivers to WinPE:
+    Dism /Add-Driver /Image:C:\WinPE_amd64\mount /Driver:X:\Drivers\NVMe_DID\ /Recurse
+
+[ ] Add RAIDXpert2 service to autostart
+
+[ ] Add PowerShell support to WinPE (requires DISM package insertion)
